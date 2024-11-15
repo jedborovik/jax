@@ -224,10 +224,17 @@ class LaxScipySpcialFunctionsTest(jtu.JaxTestCase):
   def testGammaSign(self):
     # Test that the sign of `gamma` matches at integer-valued inputs.
     dtype = jax.numpy.zeros(0).dtype  # default float dtype.
-    args_maker = lambda: [np.arange(-10, 10).astype(dtype)]
+    args = np.arange(-10, 10).astype(dtype)
     rtol = 1E-3 if jtu.test_device_matches(["tpu"]) else 1e-5
-    self._CheckAgainstNumpy(osp_special.gamma, lsp_special.gamma, args_maker, rtol=rtol)
-    self._CompileAndCheck(lsp_special.gamma, args_maker, rtol=rtol)
+    scipy_version = jtu.parse_version(scipy.__version__)
+    if scipy_version >= jtu.parse_version("1.9.0"):
+      expected = osp_special.gamma(args)
+      expected[args < 0] = np.nan
+    else:
+      expected = osp_special.gamma(args)
+    actual = lsp_special.gamma(args)
+    self.assertAllClose(expected, actual, rtol=rtol)
+    self._CompileAndCheck(lsp_special.gamma, lambda: [args], rtol=rtol)
 
   def testNdtriExtremeValues(self):
     # Testing at the extreme values (bounds (0. and 1.) and outside the bounds).
