@@ -99,6 +99,12 @@ def gammasgn(x: ArrayLike) -> Array:
 def gamma(x: ArrayLike) -> Array:
   r"""The gamma function.
 
+  For negative integers, the gamma function returns `inf`.
+"""
+  x, = promote_args_inexact("gamma", x)
+  negative_int_mask = (x < 0) & (x == jnp.floor(x))
+  return jnp.where(negative_int_mask, jnp.inf, gammasgn(x) * lax.exp(lax.lgamma(x)))
+
   JAX implementation of :obj:`scipy.special.gamma`.
 
   The gamma function is defined for :math:`\Re(z)>0` as
