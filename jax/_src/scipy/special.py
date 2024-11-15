@@ -130,7 +130,7 @@ def gamma(x: ArrayLike) -> Array:
     Unlike the scipy version, JAX's ``gamma`` does not support complex-valued inputs.
   """
   x, = promote_args_inexact("gamma", x)
-  return gammasgn(x) * lax.exp(lax.lgamma(x))
+  return jnp.where(x == jnp.floor(x) & (x < 0), jnp.inf * gammasgn(x), gammasgn(x) * lax.exp(lax.lgamma(x)))
 
 
 def betaln(a: ArrayLike, b: ArrayLike) -> Array:
