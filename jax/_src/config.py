@@ -1556,6 +1556,18 @@ disallow_mesh_context_manager = bool_state(
     ),
 )
 
+exec_time_optimization_effort = float_state(
+  name='jax_exec_time_optimization_effort',
+  default=0.0,
+  help=('Description'),
+)
+
+memory_fitting_effort = float_state(
+  name='jax_memory_fitting_effort',
+  default=0.0,
+  help=('Description'),
+)
+
 def _update_x64_global(val):
   lib.jax_jit.global_state().enable_x64 = val
 
