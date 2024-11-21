@@ -190,10 +190,10 @@ def get_compile_options(
     assert device_assignment.computation_count() == num_partitions
     compile_options.device_assignment = device_assignment
 
-  if config.exec_time_optimization_effort.value > 0:
-    build_options.exec_time_optimization_effort = config.exec_time_optimization_effort.value
-  if config.memory_fitting_effort.value > 0:
-    build_options.memory_fitting_effort = config.memory_fitting_effort.value
+  if exec_time_optimization_effort := config.exec_time_optimization_effort.value:
+    build_options.exec_time_optimization_effort = exec_time_optimization_effort
+  if memory_fitting_effort := config.memory_fitting_effort.value:
+    build_options.memory_fitting_effort = memory_fitting_effort
 
   if env_options_overrides is not None:
     # Some overrides are passed directly on build_options.

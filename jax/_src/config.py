@@ -1558,13 +1558,13 @@ disallow_mesh_context_manager = bool_state(
 
 exec_time_optimization_effort = float_state(
   name='jax_exec_time_optimization_effort',
-  default=0.0,
+  default=0.,
   help=('Description'),
 )
 
 memory_fitting_effort = float_state(
   name='jax_memory_fitting_effort',
-  default=0.0,
+  default=0.,
   help=('Description'),
 )
 
