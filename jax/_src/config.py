@@ -1371,6 +1371,18 @@ persistent_cache_min_compile_time_secs = float_state(
           'persistent compilation cache. This threshold can be raised to '
           'decrease the number of entries written to the cache.'))
 
+exec_time_optimization_effort = float_state(
+  name='jax_exec_time_optimization_effort',
+  default=0.,
+  help=('Effort to put into optimizing XLA executables for execution time.'),
+)
+
+memory_fitting_effort = float_state(
+  name='jax_memory_fitting_effort',
+  default=0.,
+  help=('Effort to put into reducing memory usage of XLA executables.'),
+)
+
 persistent_cache_min_entry_size_bytes = int_state(
     name='jax_persistent_cache_min_entry_size_bytes',
     default=0,

@@ -198,6 +198,10 @@ def get_compile_options(
     for name in overrides_on_build_options:
       if name in env_options_overrides:
         setattr(build_options, name, env_options_overrides.pop(name))
+    if exec_time_optimization_effort := config.exec_time_optimization_effort.value:
+        build_options.exec_time_optimization_effort = exec_time_optimization_effort
+    if memory_fitting_effort := config.memory_fitting_effort.value:
+        build_options.memory_fitting_effort = memory_fitting_effort
     compile_options.env_option_overrides = list(env_options_overrides.items())
 
   debug_options = compile_options.executable_build_options.debug_options
