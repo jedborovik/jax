@@ -159,6 +159,8 @@ def get_compile_options(
   build_options.use_spmd_partitioning = use_spmd_partitioning
   build_options.use_auto_spmd_partitioning = use_auto_spmd_partitioning
   build_options.use_shardy_partitioner = use_shardy_partitioner
+  build_options.exec_time_optimization_effort = config.jax_exec_time_optimization_effort.value
+  build_options.memory_fitting_effort = config.jax_memory_fitting_effort.value
   if fdo_profile is not None:
     build_options.fdo_profile = fdo_profile
   if use_auto_spmd_partitioning:

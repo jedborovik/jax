@@ -1371,6 +1371,20 @@ persistent_cache_min_compile_time_secs = float_state(
           'persistent compilation cache. This threshold can be raised to '
           'decrease the number of entries written to the cache.'))
 
+jax_exec_time_optimization_effort = float_state(
+    name='jax_exec_time_optimization_effort',
+    default=1.0,
+    help=("Control the effort spent optimizing for execution time during "
+          "compilation.  Values range from 0.0 (minimal effort) to 1.0 "
+           "(maximal effort)."))
+
+jax_memory_fitting_effort = float_state(
+    name='jax_memory_fitting_effort',
+    default=1.0,
+    help=("Control the effort spent optimizing for memory usage during "
+          "compilation. Values range from 0.0 (minimal effort) to 1.0 "
+          "(maximal effort)."))
+
 persistent_cache_min_entry_size_bytes = int_state(
     name='jax_persistent_cache_min_entry_size_bytes',
     default=0,
